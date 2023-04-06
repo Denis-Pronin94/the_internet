@@ -1,3 +1,4 @@
 .idea/
 __pycache__/
 allure_results
+settings.local.yaml

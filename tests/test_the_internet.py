@@ -1,5 +1,7 @@
 import allure
 
+from config import NAME, PASSWORD
+
 from pages.the_internet_page import AddAndRemoveElementsPage, BasicAuthPage
 
 from selenium import webdriver
@@ -27,7 +29,7 @@ class TestWelcomeToTheInternet:
         """Тест - авторизация."""
         basic_auth = BasicAuthPage(
             driver,
-            'http://admin:admin@the-internet.herokuapp.com/basic_auth',
+            f'http://{NAME}:{PASSWORD}@the-internet.herokuapp.com/basic_auth',
         )
         basic_auth.open()
         header, text = basic_auth.return_text_auth()
