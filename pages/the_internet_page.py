@@ -6,6 +6,7 @@ from locators.the_internet_locators import (
     AddAndRemoveElementsLocators,
     BasicAuthPageLocators,
     CheckBoxesPageLocators,
+    ContextMenuPageLocators,
 )
 
 from pages.base_page import BasePage
@@ -86,3 +87,21 @@ class CheckBoxesPage(BasePage):
         except TimeoutException:
             return False
         return True
+
+
+class ContextMenuPage(BasePage):
+    """ContextMenuPage."""
+
+    locators = ContextMenuPageLocators()
+
+    @allure.step("Кликаем правой кнопкой мыши и возвращаем текст алерта.")
+    def right_click(self) -> str:
+        """Кликаем правой кнопкой мыши и возвращаем текст алерта."""
+        self.action_right_click(self.element_is_visible(self.locators.BOX))
+        alert_text = self.driver.switch_to.alert
+        return alert_text.text
+
+    @allure.step("Закрываем алерт.")
+    def close_alert(self):
+        """Закрываем алерт."""
+        self.driver.switch_to.alert.accept()

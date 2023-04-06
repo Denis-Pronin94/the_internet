@@ -6,6 +6,7 @@ from pages.the_internet_page import (
     AddAndRemoveElementsPage,
     BasicAuthPage,
     CheckBoxesPage,
+    ContextMenuPage,
 )
 
 from selenium import webdriver
@@ -52,3 +53,15 @@ class TestWelcomeToTheInternet:
         check_box_2 = check_boxes.check_box_2()
         assert check_box_1 is True
         assert check_box_2 is False
+
+    @allure.title('Check context_menu.')
+    def test_context_menu(self, driver: webdriver):
+        """Тест - проверка чек-боксов."""
+        context_menu = ContextMenuPage(
+            driver,
+            'http://the-internet.herokuapp.com/context_menu',
+        )
+        context_menu.open()
+        alert_text = context_menu.right_click()
+        assert alert_text == 'You selected a context menu'
+        context_menu.close_alert()
