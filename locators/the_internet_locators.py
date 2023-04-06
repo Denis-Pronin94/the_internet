@@ -14,3 +14,12 @@ class BasicAuthPageLocators:
 
     HEADER = (By.XPATH, '//div[@class="example"]/h3')
     TEXT = (By.XPATH, '//div[@class="example"]/p')
+
+
+class CheckBoxesPageLocators:
+    """Локаторы для теста test_basic_auth."""
+
+    CHECK_BOX_1 = (By.XPATH, '//input[@type="checkbox"][1]')
+    CHECK_BOX_2 = (By.XPATH, '//input[@type="checkbox"][2]')
+    CHECK_BOX_ACTIVATE_1 = (By.XPATH, '//input[@checked=""][1]')
+    CHECK_BOX_ACTIVATE_2 = (By.XPATH, '//input[@checked=""][2]')

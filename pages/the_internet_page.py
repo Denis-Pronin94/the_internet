@@ -2,7 +2,11 @@ import random
 
 import allure
 
-from locators.the_internet_locators import AddAndRemoveElementsLocators, BasicAuthPageLocators
+from locators.the_internet_locators import (
+    AddAndRemoveElementsLocators,
+    BasicAuthPageLocators,
+    CheckBoxesPageLocators,
+)
 
 from pages.base_page import BasePage
 
@@ -56,3 +60,29 @@ class BasicAuthPage(BasePage):
         with allure.step('Возвращаем text.'):
             text = self.element_is_present(self.locators.TEXT).text
         return header, text
+
+
+class CheckBoxesPage(BasePage):
+    """CheckboxesPage."""
+
+    locators = CheckBoxesPageLocators()
+
+    @allure.step("Кликаем на 1-ый чек-бокс и возвращаем его статус.")
+    def check_box_1(self) -> bool:
+        """Кликаем на 1-ый чек-бокс и возвращаем его статус."""
+        self.element_is_visible(self.locators.CHECK_BOX_1).click()
+        try:
+            self.element_is_present(self.locators.CHECK_BOX_ACTIVATE_1)
+        except TimeoutException:
+            return False
+        return True
+
+    @allure.step("Кликаем на 2-ой чек-бокс и возвращаем его статус.")
+    def check_box_2(self) -> bool:
+        """Кликаем на 2-ой чек-бокс и возвращаем его статус."""
+        self.element_is_visible(self.locators.CHECK_BOX_2).click()
+        try:
+            self.element_is_present(self.locators.CHECK_BOX_ACTIVATE_2)
+        except TimeoutException:
+            return False
+        return True
