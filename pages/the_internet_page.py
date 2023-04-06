@@ -7,6 +7,7 @@ from locators.the_internet_locators import (
     BasicAuthPageLocators,
     CheckBoxesPageLocators,
     ContextMenuPageLocators,
+    DigestAuthenticationPageLocators,
 )
 
 from pages.base_page import BasePage
@@ -105,3 +106,18 @@ class ContextMenuPage(BasePage):
     def close_alert(self):
         """Закрываем алерт."""
         self.driver.switch_to.alert.accept()
+
+
+class DigestAuthenticationPage(BasePage):
+    """BasicAuthPage."""
+
+    locators = DigestAuthenticationPageLocators()
+
+    @allure.step("Возвращаем текст успешной авторизации.")
+    def return_text_auth(self) -> tuple:
+        """Возвращаем текст успешной авторизации."""
+        with allure.step('Возвращаем header.'):
+            header = self.element_is_present(self.locators.HEADER).text
+        with allure.step('Возвращаем text.'):
+            text = self.element_is_present(self.locators.TEXT).text
+        return header, text

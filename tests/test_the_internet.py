@@ -7,6 +7,7 @@ from pages.the_internet_page import (
     BasicAuthPage,
     CheckBoxesPage,
     ContextMenuPage,
+    DigestAuthenticationPage,
 )
 
 from selenium import webdriver
@@ -65,3 +66,15 @@ class TestWelcomeToTheInternet:
         alert_text = context_menu.right_click()
         assert alert_text == 'You selected a context menu'
         context_menu.close_alert()
+
+    @allure.title('Check digest_authentication.')
+    def test_digest_authentication(self, driver: webdriver):
+        """Тест - авторизация."""
+        digest_authentication = DigestAuthenticationPage(
+            driver,
+            f'http://{NAME}:{PASSWORD}@the-internet.herokuapp.com/digest_auth',
+        )
+        digest_authentication.open()
+        header, text = digest_authentication.return_text_auth()
+        assert header == 'Digest Auth'
+        assert text == 'Congratulations! You must have the proper credentials.'

@@ -29,3 +29,10 @@ class ContextMenuPageLocators:
     """Локаторы для теста test_context_menu."""
 
     BOX = (By.XPATH, '//div[@id="hot-spot"]')
+
+
+class DigestAuthenticationPageLocators:
+    """Локаторы для теста test_digest_authentication."""
+
+    HEADER = (By.XPATH, '//div[@class="example"]/h3')
+    TEXT = (By.XPATH, '//div[@class="example"]/p')
