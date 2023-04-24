@@ -9,6 +9,7 @@ from locators.the_internet_locators import (
     ContextMenuPageLocators,
     DigestAuthenticationPageLocators,
     DropdownListPageLocators,
+    DynamicallyLoadedPageLocators,
 )
 
 from pages.base_page import BasePage
@@ -139,3 +140,23 @@ class DropdownListPage(BasePage):
         self.element_is_visible(self.locators.OPTION_2).click()
         value_2 = self.element_is_visible(self.locators.OPTION_2)
         return default_text.text, value_1.text, value_2.text
+
+
+class DynamicallyLoadedPage(BasePage):
+    """DynamicallyLoadedPage."""
+
+    locators = DynamicallyLoadedPageLocators()
+
+    def example_1(self) -> str:
+        """Возвращаем текст первого примера."""
+        self.element_is_visible(self.locators.EXAMPLE_1).click()
+        self.element_is_visible(self.locators.START_BUTTON).click()
+        text_example_1 = self.element_is_visible(self.locators.FINISH)
+        return text_example_1.text
+
+    def example_2(self) -> str:
+        """Возвращаем текст второго примера."""
+        self.element_is_visible(self.locators.EXAMPLE_2).click()
+        self.element_is_visible(self.locators.START_BUTTON).click()
+        text_example_2 = self.element_is_present(self.locators.FINISH)
+        return text_example_2.text

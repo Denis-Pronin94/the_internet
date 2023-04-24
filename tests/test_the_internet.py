@@ -9,6 +9,7 @@ from pages.the_internet_page import (
     ContextMenuPage,
     DigestAuthenticationPage,
     DropdownListPage,
+    DynamicallyLoadedPage,
 )
 
 from selenium import webdriver
@@ -89,3 +90,17 @@ class TestWelcomeToTheInternet:
         assert default_text == 'Please select an option'
         assert value_1 == 'Option 1'
         assert value_2 == 'Option 2'
+
+    @allure.title('Check dynamically_loaded.')
+    def test_dynamically_loaded(self, driver: webdriver):
+        """Тест - dynamically loaded."""
+        dynamically_loaded = DynamicallyLoadedPage(
+            driver,
+            'http://the-internet.herokuapp.com/dynamic_loading',
+        )
+        dynamically_loaded.open()
+        text_example_1 = dynamically_loaded.example_1()
+        assert text_example_1 == 'Hello World!'
+        driver.back()
+        text_example_2 = dynamically_loaded.example_2()
+        assert text_example_2 == 'Hello World!'

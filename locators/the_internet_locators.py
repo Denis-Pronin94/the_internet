@@ -45,3 +45,12 @@ class DropdownListPageLocators:
     DEFAULT_TEXT = (By.XPATH, '//option[@selected="selected"]')
     OPTION_1 = (By.XPATH, '//option[@value="1"]')
     OPTION_2 = (By.XPATH, '//option[@value="2"]')
+
+
+class DynamicallyLoadedPageLocators:
+    """Локаторы для теста test_dynamically_loaded."""
+
+    EXAMPLE_1 = (By.XPATH, '//a[@href="/dynamic_loading/1"]')
+    START_BUTTON = (By.XPATH, '//div[@id="start"]/button')
+    FINISH = (By.XPATH, '//div[@id="finish"]')
+    EXAMPLE_2 = (By.XPATH, '//a[@href="/dynamic_loading/2"]')

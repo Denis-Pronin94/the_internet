@@ -19,7 +19,7 @@ class BasePage:
         self.driver.get(self.url)
 
     @allure.step('Find a visible element')
-    def element_is_visible(self, locator: str, timeout: int = 5) -> wait.mro():
+    def element_is_visible(self, locator: str, timeout: int = 10) -> wait.mro():
         """Видимый элемент."""
         self.go_to_element(self.element_is_present(locator))
         return wait(self.driver, timeout).until(EC.visibility_of_element_located(locator))
@@ -30,7 +30,7 @@ class BasePage:
         return wait(self.driver, timeout).until(EC.visibility_of_all_elements_located(locator))
 
     @allure.step('Find a present element')
-    def element_is_present(self, locator: str, timeout: int = 5) -> wait.mro():
+    def element_is_present(self, locator: str, timeout: int = 10) -> wait.mro():
         """Не обязательно видимый элемент."""
         return wait(self.driver, timeout).until(EC.presence_of_element_located(locator))
 
