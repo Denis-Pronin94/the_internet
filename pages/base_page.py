@@ -21,6 +21,7 @@ class BasePage:
     @allure.step('Find a visible element')
     def element_is_visible(self, locator: str, timeout: int = 5) -> wait.mro():
         """Видимый элемент."""
+        self.go_to_element(self.element_is_present(locator))
         return wait(self.driver, timeout).until(EC.visibility_of_element_located(locator))
 
     @allure.step('Find visible elements')
@@ -65,4 +66,18 @@ class BasePage:
         """Клик правой кнопкой мыши."""
         action = ActionChains(self.driver)
         action.context_click(element)
+        action.perform()
+
+    @allure.step('Drag_and_drop')
+    def action_drag_and_drop_to_element(self, what: str, where: int):
+        """Двигаем елемент."""
+        action = ActionChains(self.driver)
+        action.drag_and_drop(what, where)
+        action.perform()
+
+    @allure.step('Drag and drop by offset')
+    def action_drag_and_drop_by_offset(self, element: str, x_coords: int, y_coords: int):
+        """Двигаем по координатам."""
+        action = ActionChains(self.driver)
+        action.drag_and_drop_by_offset(element, x_coords, y_coords)
         action.perform()

@@ -8,6 +8,7 @@ from locators.the_internet_locators import (
     CheckBoxesPageLocators,
     ContextMenuPageLocators,
     DigestAuthenticationPageLocators,
+    DropdownListPageLocators,
 )
 
 from pages.base_page import BasePage
@@ -121,3 +122,20 @@ class DigestAuthenticationPage(BasePage):
         with allure.step('Возвращаем text.'):
             text = self.element_is_present(self.locators.TEXT).text
         return header, text
+
+
+class DropdownListPage(BasePage):
+    """DragAndDropPage."""
+
+    locators = DropdownListPageLocators()
+
+    def dropdown(self) -> tuple:
+        """Возвращаем текст всех строк дропдауна."""
+        default_text = self.element_is_visible(self.locators.DEFAULT_TEXT)
+        self.element_is_visible(self.locators.LIST).click()
+        self.element_is_visible(self.locators.OPTION_1).click()
+        value_1 = self.element_is_visible(self.locators.OPTION_1)
+        self.element_is_visible(self.locators.LIST).click()
+        self.element_is_visible(self.locators.OPTION_2).click()
+        value_2 = self.element_is_visible(self.locators.OPTION_2)
+        return default_text.text, value_1.text, value_2.text

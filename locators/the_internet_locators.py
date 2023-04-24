@@ -36,3 +36,12 @@ class DigestAuthenticationPageLocators:
 
     HEADER = (By.XPATH, '//div[@class="example"]/h3')
     TEXT = (By.XPATH, '//div[@class="example"]/p')
+
+
+class DropdownListPageLocators:
+    """Локаторы для теста test_dropdown_list."""
+
+    LIST = (By.XPATH, '//select[@id="dropdown"]')
+    DEFAULT_TEXT = (By.XPATH, '//option[@selected="selected"]')
+    OPTION_1 = (By.XPATH, '//option[@value="1"]')
+    OPTION_2 = (By.XPATH, '//option[@value="2"]')

@@ -8,6 +8,7 @@ from pages.the_internet_page import (
     CheckBoxesPage,
     ContextMenuPage,
     DigestAuthenticationPage,
+    DropdownListPage,
 )
 
 from selenium import webdriver
@@ -78,3 +79,13 @@ class TestWelcomeToTheInternet:
         header, text = digest_authentication.return_text_auth()
         assert header == 'Digest Auth'
         assert text == 'Congratulations! You must have the proper credentials.'
+
+    @allure.title('Check dropdown list.')
+    def test_dropdown_list(self, driver: webdriver):
+        """Тест - dropdown list."""
+        dropdown_list = DropdownListPage(driver, 'http://the-internet.herokuapp.com/dropdown')
+        dropdown_list.open()
+        default_text, value_1, value_2 = dropdown_list.dropdown()
+        assert default_text == 'Please select an option'
+        assert value_1 == 'Option 1'
+        assert value_2 == 'Option 2'
